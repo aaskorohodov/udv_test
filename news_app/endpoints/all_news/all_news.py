@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from news_app.endpoints.all_news.data_sorter import DataSorter
+from news_app.endpoints.all_news.data_sorter_all_news import DataSorter
 from news_app.utils.db_reader import MyShinyDBReader
 
 

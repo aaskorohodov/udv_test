@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 from pydantic import BaseModel
 
@@ -5,7 +6,7 @@ from pydantic import BaseModel
 class NewsItemResponse(BaseModel):
     id: int
     title: str
-    date: str
+    date: datetime
     body: str
     deleted: bool
     comments_count: int
