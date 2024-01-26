@@ -9,7 +9,7 @@ from news_app.models.internal.news import NewsItem
 from news_app.utils.db_reader import MyShinyDBReader
 
 
-class TestMyShinyDBReader(unittest.TestCase):
+class TestMyShinyDBReader(unittest.IsolatedAsyncioTestCase):
     """Тестирует MyShinyDBReader"""
 
     def setUp(self) -> None:
@@ -98,7 +98,7 @@ class TestMyShinyDBReader(unittest.TestCase):
                 comment="Comment text 2"
             ),
         ]
-        result = self.db_reader._create_models_from_list(raw_data, CommentItem)
+        result = asyncio.run(self.db_reader._create_models_from_list(raw_data, CommentItem))
         self.assertIsInstance(result, list)
         for el in result:
             self.assertIsInstance(el, CommentItem)
@@ -112,10 +112,10 @@ class TestMyShinyDBReader(unittest.TestCase):
         for el in result:
             self.assertIsInstance(el, NewsItem)
 
-    def test_read_comments(self):
+    async def test_read_comments(self):
         """Проверяем, что db_reader._read_comments возвращает модели CommentItem"""
 
-        result = asyncio.run(self.db_reader._read_comments())
+        result = await self.db_reader._read_comments()
         self.assertNotEqual(0, len(result))
         for el in result:
             self.assertIsInstance(el, CommentItem)

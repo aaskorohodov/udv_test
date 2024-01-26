@@ -46,7 +46,7 @@ class MyShinyDBReader:
             Список с моделями комментариев (внутренние модели, Data-классы)"""
 
         comments_dict = self._read_json(self._comments_path)['comments']
-        comments_models = self._create_models_from_list(comments_dict, CommentItem)
+        comments_models = await self._create_models_from_list(comments_dict, CommentItem)
 
         # noinspection PyTypeChecker
         return comments_models
@@ -58,12 +58,12 @@ class MyShinyDBReader:
             Список с моделями новостей (внутренние модели, Data-классы)"""
 
         news_dict = self._read_json(self._news_path)['news']
-        news_models = self._create_models_from_list(news_dict, NewsItem)
+        news_models = await self._create_models_from_list(news_dict, NewsItem)
 
         # noinspection PyTypeChecker
         return news_models
 
-    def _create_models_from_list(self, raw_data: list[dict], base_model: type[BaseModel]) -> list[BaseModel]:
+    async def _create_models_from_list(self, raw_data: list[dict], base_model: type[BaseModel]) -> list[BaseModel]:
         """Превращает переданный список словарей в желаемую (переданную) модель
 
         Пропускает всё, что не может превратить в модель. Потому что в raw_data есть news_count и comments_count

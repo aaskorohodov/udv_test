@@ -8,9 +8,13 @@ router = APIRouter()
 
 @router.get("/news/{news_id}")
 async def get_news_by_id(news_id: int):
+    """Возвращает данные по запрошенной новости"""
+
+    # Читаем данные (имитируем чтение базы)
     db_reader = MyShinyDBReader()
     comments_and_news = await db_reader.read_news_and_comments()
 
+    # Обрабатываем прочитанные данные, формируем модель для ответа
     specific_news_sorter = SpecificNewsDataSorter(comments_and_news)
     result = specific_news_sorter.get_specific_news(news_id)
 

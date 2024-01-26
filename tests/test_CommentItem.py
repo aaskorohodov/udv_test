@@ -5,8 +5,8 @@ from news_app.models.internal.comments import CommentItem
 from news_app.models.response.news_by_id_response.specific_news import CommentItemResponse
 
 
-class TestMyShinyDBReader(unittest.TestCase):
-    """Тестирует MyShinyDBReader"""
+class TestCommentItem(unittest.TestCase):
+    """Тестирует CommentItem"""
 
     def setUp(self) -> None:
         """Создаем CommentItem"""
